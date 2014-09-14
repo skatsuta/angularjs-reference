@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="app">
+<html class="no-js" ng-app="angularjsReference">
   <head>
     <meta charset="utf-8">
     <title>frontend</title>
@@ -27,10 +27,6 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-controller="myController">
-      <div>{{message}}</div>
-      <button ng-click="action()">Push me!</button>
-    </div>
     <div ng-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -56,7 +52,6 @@
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/angularjsReference.js"></script>
     <script src="scripts/main/main-ctrl.js"></script>
-    <script src="scripts/app.js"></script>
 
     <!-- inject:partials -->
     <!-- angular templates will be automaticaly converted in js and inserted here -->

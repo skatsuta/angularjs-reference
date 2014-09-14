@@ -1,6 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
+var notify = require('gulp-notify');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license']
@@ -48,6 +50,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
   var assets;
 
   return gulp.src('app/*.html')
+    .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
     .pipe($.inject(gulp.src('.tmp/partials/**/*.js'), {
       read: false,
       starttag: '<!-- inject:partials -->',
