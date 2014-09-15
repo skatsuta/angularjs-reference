@@ -27,10 +27,46 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-controller="myController">
-      <div>{{message}}</div>
-      <button ng-click="action()">Push me!</button>
+    <div id="section2">
+      <h2>Section 2-1 DOM 操作</h2>
+
+      <h3>ngBind</h3>
+      <input type="text" name="" id="" ng-model="name211">
+      <p ng-bind="name211"></p>
+      {{name}}
+
+      <h3>ngBindHtml</h3>
+      <input type="text" name="" id="" ng-model="name212">
+      <p ng-bind-html="name212"></p>
+
+      <h3>ngBindTemplate</h3>
+      <input type="text" name="" id="" ng-model="name213">
+      <p ng-bind-template="{{name213}}"></p>
+
+      <h3>ngNonBindable</h3>
+      <input type="text" name="" id="" ng-model="name214">
+      <p>My name is {{name214}}</p>
+      <p ng-non-bindable="">My name is {{name214}}</p>
+
+      <h3>ngCloak</h3>
+      <input type="text" name="" id="" ng-model="name215">
+      <p ng-cloak="">{{name215}}</p>
+
+      <h3>ngStyle</h3>
+      <p ng-style="myStyle">Sample Text</p>
+      <div><label><input type="radio" name="textDecoration" id="" ng-click="myStyle={textDecoration: 'overline'}">text-decoration: 'overline';</label></div>
+      <div><input type="radio" name="textDecoration" id="" ng-click="myStyle={textDecoration: 'line-through'}">text-decoration: 'line-through';</div>
+      <div><input type="radio" name="textDecoration" id="" ng-click="myStyle={textDecoration: 'underline'}">text-decoration: 'underline';</div>
     </div>
+
+    <div id="section1">
+      <h1>Section 1</h1>
+      <div ng-controller="myController">
+        <div>{{message}}</div>
+        <button ng-click="action()">Push me!</button>
+      </div>
+    </div>
+
     <div ng-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
