@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="app">
+<html class="no-js" lang="ja" ng-app="app">
   <head>
     <meta charset="utf-8">
     <title>frontend</title>
@@ -26,9 +26,161 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div id="section3">
+      <h1>Section 3 Filter / Service / Form Validation</h1>
+
+      <h2>Section 3-3 Form Validation</h2>
+
+      <h3>3-3-1 validation definition</h3>
+      <form name="loginform" novalidate>
+        <p>Login ID</p>
+        <input type="text" name="userLoginId" id="" ng-model="user.loginId" ng-minlength="4" ng-maxlength="8" ng-pattern="/^[a-zA-Z0-9]+$/" required>
+        <span ng-show="loginform.userLoginId.$error.minlength">More than 4 chars.</span>
+        <span ng-show="loginform.userLoginId.$error.maxlength">Less than 8 chars.</span>
+        <span ng-show="loginform.userLoginId.$error.pattern">Alphanumeric only.</span>
+        <span ng-show="loginform.userLoginId.$error.required">Required.</span>
+        <p>Password</p>
+        <input type="password" name="userPassword" id="" ng-model="user.password" ng-pattern="/^[a-zA-Z0-9]{4,8}$/" ng-required="true">
+        <span ng-show="loginform.userPassword.$error.pattern">Alphanumeric only.</span>
+        <span ng-show="loginform.userPassword.$error.required">Required.</span>
+        
+        <input type="submit" value="Login" ng-disabled="loginform.$invalid">
+      </form>
+
+      <h2>Section 3-2 Service</h2>
+
+      <h3>3-2-1 $rootScope</h3>
+      <div ng-controller="scope1">
+        <p>{{test}}</p>
+        <p>{{rootTest}}</p>
+      </div>
+      <div ng-controller="scope2">
+        <p>{{test}}</p>
+        <p>{{rootTest}}</p>
+      </div>
+
+      <h2>Section 3-1 Filter</h2>
+
+      <h3>3-1-8 filter</h3>
+      <div ng-controller="FilterCtrl">
+        <input type="text" name="" id="" ng-model="mySearch">
+        <ul>
+          <li ng-repeat="person in myList | filter: mySearch">{{person.name}}</li>
+        </ul>
+
+        <div>
+          <input type="text" name="" id="" ng-model="mySearchTwitter.twitterid">
+          Filter by Twitter ID
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Twitter ID</th>
+              <th>Following</th>
+              <th>Followers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="info in twitterinfo | filter: mySearchTwitter">
+              <td>{{info.twitterid}}</td>
+              <td>{{info.following}}</td>
+              <td>{{info.followers}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {{today}}
+        {{today | date: 'fullDate'}}
+      </div>
+
+
+      <h3>3-1-5 limitTo</h3>
+      <div>
+        <h4>Non-filter</h4>
+        <ul>
+          <li ng-repeat="item in list">{{item}}</li>
+        </ul>
+        <h4>Filter</h4>
+        <ul>
+          <li ng-repeat="item in list | limitTo: 3">{{item}}</li>
+        </ul>
+      </div>
+
+      <h3>3-1-1 Currency</h3>
+      <div ng-controller="CurrencyCtrl">
+        <input type="text" name="" id="" ng-model="dollar">
+        <p>Non-filter: {{dollar}}</p>
+        <p>Filter: {{dollar | currency}}</p>
+      </div>
+    </div>
+
 
     <div id="section2">
+
+      <h2>Section 2-3 form / input</h2>
+
+      <h3>2-3-13 ngValue</h3>
+      <form ng-init="user.selected=''">
+        <ul ng-init="list2313=['A', 'B', 'C']">
+          <li ng-repeat="name in list2313">
+            <input type="radio" name="" id="" ng-model="user.selected" ng-value="name">{{name}}
+          </li>
+        </ul>
+        <div>{{user.selected}} is selected.</div>
+      </form>
+
+      <h3>2-3-11 ngList</h3>
+      <input type="text" name="" id="" ng-model="list" ng-list="">comma separation
+      <ul>
+        <li ng-repeat="item in list">{{item}}</li>
+      </ul>
+
+      <h3>2-3-9 input[radio]</h3>
+      <div ng-init="str = 'string';array=['a', 'b', 'c'];hash={data: 'hash'};"></div>
+      <input type="radio" name="" id="" ng-model="value239" value="true">value<br>
+      <input type="radio" name="" id="" ng-model="value239" ng-value="str">ng-value=str<br>
+      <input type="radio" name="" id="" ng-model="value239" ng-value="array">ng-value=array<br>
+      <input type="radio" name="" id="" ng-model="value239" ng-value="hash">ng-value=hash<br>
+      {{value239}}
+
+      <h3>2-3-4 input</h3>
+      <p>
+        <input type="text" name="" id="" ng-model="model234" required="" ng-minlength="5">
+        {{model234}}: Length {{model234.length}}
+      </p>
+      <p>
+        <input type="text" name="" id="" ng-model="trimModel" ng-trim="false">
+        {{trimModel}}: Length {{trimModel.length}}
+      </p>
+
+
+      <h3>2-3-2 ngForm</h3>
+      <form name="demoForm" ng-init="list=['foo', 'bar', 'baz', 'hoge', 'piyo', 'fuga']">
+        <div ng-repeat="item in list" ng-form="">
+          <input type="text" name="" id="" ng-value="item">
+          <input type="submit" value="Update">
+        </div>
+      </form>
+
       <h2>Section 2-2 Event</h2>
+
+      <h3>2-2-20 $event</h3>
+      <div ng-controller="EventCtrl"><button ng-click="click($event)">Click</button></div>
+
+      <h3>2-2-19 ngSubmit</h3>
+      <div ng-controller="SubmitCtrl">
+        <form ng-submit="submit()">
+          <label><input type="checkbox" name="" id="" ng-model="check2219">Agree</label>
+          <input type="submit" value="Submit">
+        </form>
+        <p>{{message}}</p>
+      </div>
+
+      <h3>2-2-15 ngChecked</h3>
+      <div><label for=""><input type="checkbox" name="" id="" ng-model="allcheck">Check all</label></div>
+      <div><label for=""><input type="checkbox" name="" id="" ng-checked="allcheck">Yosemite</label></div>
+      <div><label for=""><input type="checkbox" name="" id="" ng-checked="allcheck">Marvericks</label></div>
+      <div><label for=""><input type="checkbox" name="" id="" ng-checked="allcheck">Mountain Lion</label></div>
 
       <h3>ngChange</h3>
       <div ng-controller="CountCtrl">
@@ -101,6 +253,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-i18n/angular-locale_ja-jp.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
