@@ -28,6 +28,21 @@
     <![endif]-->
 
     <div id="section2">
+      <h2>Section 2-2 Event</h2>
+
+      <h3>ngChange</h3>
+      <div ng-controller="CountCtrl">
+        <textarea name="" id="" cols="60" rows="15" ng-change="change()" ng-model="tweet"></textarea>
+        <p>{{count}} characters<span ng-hide="isOver"> remaining</span><span ng-show="isOver"> over</span></p>
+      </div>
+
+
+      <h3>ngClick</h3>
+      <input type="button" value="+1 by click" ng-click="count=count+1">
+      <input type="button" value="*2 by click" ng-click="click()">
+      <p>{{count}}</p>
+
+
       <h2>Section 2-1 DOM 操作</h2>
 
       <h3>ngBind</h3>
